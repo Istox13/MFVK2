@@ -35,9 +35,9 @@ class Example(QWidget):
         if self.name_input.text().isdigit():
             self.User_name()
             if os.name == 'nt':
-                os.system('python run.py {}'.format(self.name_input.text()))
+                os.system('python MFVK.py {}'.format(self.name_input.text()))
             else:
-                os.system('python3 run.py {}'.format(self.name_input.text()))
+                os.system('python3 MFVK.py {}'.format(self.name_input.text()))
 
         else:
             self.label.setText("Некорректный ввод")

@@ -7,6 +7,7 @@ from interface import Ui_MainWindow
 from Libs.player import Player
 from Libs.Get_music import VK_lib
 from Libs.Download_music import download
+from PyQt5.QtCore import Qt
 
  
 class MyWidget(QMainWindow, Ui_MainWindow):
@@ -22,7 +23,6 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         self.set_image()
         self.Player = Player()
         self.pause = False
-        self.play = False
         self.index = '-1'
         self.volume = 50
         
@@ -32,6 +32,11 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         for k, l in self.playlist_VK.items():
             self.playlist.addItem('{}. {} - {}'.format(k, l['artist'], l['name']))
         self.playlist.itemClicked.connect(self.play_music)
+
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key_Q:
+            print('OK')
+            
 
     def set_image(self, path='Images/image1.jpg'):
         pixmap = QPixmap(path)
@@ -56,9 +61,8 @@ class MyWidget(QMainWindow, Ui_MainWindow):
             self.volume_print.setText(str(self.volume) + '%')
 
     def play_pause_m(self):
-        if not self.play:
+        if self.index == '-1':
             self.next_m()
-            self.play = True
             self.pause = not self.pause
             self.play_pause.setText('||')
 

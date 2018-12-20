@@ -38,7 +38,7 @@ class VK_lib:
             if len(ms) >= 13:
                 n_ms.append(ms[:13])
             ms = ms[13:]
-        
+        error_url = 0
         for n, i in enumerate(n_ms):
             composition = dict()
             composition['artist'] = i[11].strip().split('<div class="artist">')[1].split('<')[0]
@@ -46,10 +46,13 @@ class VK_lib:
             composition['image'] =  i[1].strip().split('url(')[1].split("'")[1]
             if composition['image'][:8] != 'https://':
                 composition['image'] = 'None'
-            print(composition['image'])
             composition['long'] = i[9].strip().split('<div class="duration">')[1].split('<')[0]
             composition['url'] = i[2].strip().split('<div class="play" data="')[1].split('"')[0]
-            music[str(n)] = composition
+
+            if composition['url']:
+                music[str(n - error_url)] = composition
+            else:
+                error_url += 1
         return music
 
 
