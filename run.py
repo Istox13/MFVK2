@@ -27,6 +27,7 @@ class MyWidget(QMainWindow, Ui_MainWindow):
         self.volume = 50
         
         self.playlist_VK = VK_lib.get_dict(self.USER_ID)
+
         self.count = len(self.playlist_VK.keys()) - 1
         for k, l in self.playlist_VK.items():
             self.playlist.addItem('{}. {} - {}'.format(k, l['artist'], l['name']))

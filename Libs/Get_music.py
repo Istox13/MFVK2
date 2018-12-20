@@ -43,6 +43,10 @@ class VK_lib:
             composition = dict()
             composition['artist'] = i[11].strip().split('<div class="artist">')[1].split('<')[0]
             composition['name'] = i[10].strip().split('<div class="title">')[1].split('<')[0]
+            composition['image'] =  i[1].strip().split('url(')[1].split("'")[1]
+            if composition['image'][:8] != 'https://':
+                composition['image'] = 'None'
+            print(composition['image'])
             composition['long'] = i[9].strip().split('<div class="duration">')[1].split('<')[0]
             composition['url'] = i[2].strip().split('<div class="play" data="')[1].split('"')[0]
             music[str(n)] = composition
